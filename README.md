@@ -68,7 +68,7 @@ This command will basically create a new json file in your local machine with th
 
 ## Best Practices
 
-Keep basic configuration information easily accessible. (I do that by storing them in a flash drive or env_variable but I still put it somewhere)
+Keep basic configuration information easily accessible. (I do that by storing them in a flash drive or env_variables but I still put them somewhere)
 
 ## Automation
 I have written a python script that does just what I explained here. You just have to type in terminal:
