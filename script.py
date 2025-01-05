@@ -102,8 +102,8 @@ class AWSTokenRefresher:
         """Main method to check and refresh tokens if needed."""
         logger.info("Checking AWS token validity...")
         
-        if self.check_token_validity():
-            logger.info("token works but still want to do something Token expired or invalid. Initiating refresh...")
+        if not self.check_token_validity():
+            logger.info("Token expired or invalid. Initiating refresh...")
             
             if self.refresh_token():
                 logger.info("Token refresh successful.")
