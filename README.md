@@ -14,7 +14,7 @@ I hope this could be helpful. It is up to date and I will be maintaing it at lea
 ## The Token Refresh Challenge
 
 When using AWS with GitHub Actions or other services, access tokens expire (typically after 1 hour), requiring manual refresh (At least that is what 
-I was doing). This guide explains the manual process and provides automation solutions.
+I was doing). Here is a simple solution I came with.
 
 ## Manual Token Refresh Process
 
