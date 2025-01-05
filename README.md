@@ -71,4 +71,3 @@ replace <profile-name> with the last profile name you used to perform the previo
 
 anvix9 
 
-# AWS-Token-Refresh-Automation-Guide-in-terminal-
