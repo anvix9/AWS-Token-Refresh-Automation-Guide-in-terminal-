@@ -28,6 +28,7 @@ If expired, you'll see:
 ```
 ... The security token included in the request is expired
 ```
+Or close to that...
 
 ### 2. Refresh Process
 1. Run the SSO configuration:
