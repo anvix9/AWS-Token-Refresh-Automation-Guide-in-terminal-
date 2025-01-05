@@ -67,8 +67,8 @@ This command will basically create a new json file in your local machine with th
 - Extract and update the required credentials
 
 ## Best Practices
-1. Store credentials securely (preferably offline or in environment variables)
-2. Keep basic configuration information easily accessible
+
+Keep basic configuration information easily accessible. (I do that by storing them in a flash drive or env_variable but I still put it somewhere)
 
 ## Automation
 I have written a python script that does just what I explained here. You just have to type in terminal:
