@@ -5,6 +5,7 @@ import datetime
 from pathlib import Path
 import logging
 from typing import Dict, Optional
+import configparser
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -12,7 +13,7 @@ logger = logging.getLogger(__name__)
 class AWSTokenRefresher:
     def __init__(self, profile_name: str):
         self.profile_name = profile_name
-        self.aws_cli_path = Path.home() / '.aws' / 'cli'
+        self.aws_cli_path = Path.home() / '.aws' / 'cli' / 'cache'
         self.credentials_path = Path.home() / '.aws' / 'credentials'
 
     def check_token_validity(self) -> bool:
@@ -53,7 +54,7 @@ class AWSTokenRefresher:
                 if file_time > latest_time:
                     latest_time = file_time
                     latest_file = file
-
+            
             if latest_file:
                 with open(latest_file, 'r') as f:
                     return json.load(f)
@@ -64,6 +65,8 @@ class AWSTokenRefresher:
 
     def update_credentials(self, new_credentials: Dict) -> bool:
         """Update the AWS credentials file with new tokens."""
+
+        print(f"New Credentials: {new_credentials}")
         try:
             # Create a backup of existing credentials
             if self.credentials_path.exists():
@@ -79,11 +82,12 @@ class AWSTokenRefresher:
 
             if self.profile_name not in config.sections():
                 config.add_section(self.profile_name)
-
+            
+            print(dict(config['admin-1']))
             config[self.profile_name].update({
-                'aws_access_key_id': new_credentials['accessKeyId'],
-                'aws_secret_access_key': new_credentials['secretAccessKey'],
-                'aws_session_token': new_credentials['sessionToken']
+                'aws_access_key_id': new_credentials['Credentials']['AccessKeyId'],
+                'aws_secret_access_key': new_credentials['Credentials']['SecretAccessKey'],
+                'aws_session_token': new_credentials['Credentials']['SessionToken']
             })
 
             with open(self.credentials_path, 'w') as f:
@@ -98,8 +102,8 @@ class AWSTokenRefresher:
         """Main method to check and refresh tokens if needed."""
         logger.info("Checking AWS token validity...")
         
-        if not self.check_token_validity():
-            logger.info("Token expired or invalid. Initiating refresh...")
+        if self.check_token_validity():
+            logger.info("token works but still want to do something Token expired or invalid. Initiating refresh...")
             
             if self.refresh_token():
                 logger.info("Token refresh successful.")
