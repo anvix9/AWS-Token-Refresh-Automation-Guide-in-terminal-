@@ -3,6 +3,7 @@ import json
 import subprocess
 import datetime
 from pathlib import Path
+import time
 import logging
 from typing import Dict, Optional
 import configparser
@@ -65,7 +66,7 @@ class AWSTokenRefresher:
 
     def update_credentials(self, new_credentials: Dict) -> bool:
         """Update the AWS credentials file with new tokens."""
-
+        time.sleep(1) # to let the system refresh and find eaily the new created file
         print(f"New Credentials: {new_credentials}")
         try:
             # Create a backup of existing credentials
